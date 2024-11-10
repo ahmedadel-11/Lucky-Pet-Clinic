@@ -1,0 +1,161 @@
+﻿<Window x:Class="Lucky_Pet_Clinic2.Views.Windows.VaccinationWindow"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       xmlns:local="clr-namespace:Lucky_Pet_Clinic2.Views.Windows"
+       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+       Title="Vaccination Details"
+       d:DesignHeight="500"
+       d:DesignWidth="850"
+       Background="#f0f4f7"
+       WindowStartupLocation="CenterScreen"
+       mc:Ignorable="d"
+        
+        >
+
+    <Grid Background="#ffffff" Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Text="Vaccination Details" 
+                   FontSize="22" 
+                   FontWeight="Bold" 
+                   Foreground="#2a4d69"
+                   Margin="0, 0, 0, 20" 
+                   HorizontalAlignment="Center"/>
+
+        <!-- Scrollable Content -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+            <Grid Margin="15, 20, 15, 0">
+                
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Labels -->
+                <TextBlock Text="Pet Name" 
+                           Grid.Row="0" 
+                           Foreground="#2a4d69" 
+                           FontWeight="SemiBold" 
+                           VerticalAlignment="Center"/>
+                
+                <TextBlock Text="Vaccination Type" 
+                           Grid.Row="1" 
+                           Foreground="#2a4d69" 
+                           FontWeight="SemiBold"
+                           VerticalAlignment="Center"/>
+                <TextBlock Text="Vet" 
+                           Grid.Row="2" 
+                           Foreground="#2a4d69" 
+                           FontWeight="SemiBold"
+                           VerticalAlignment="Center"/>
+                <TextBlock Text="Date" 
+                           Grid.Row="3" 
+                           Foreground="#2a4d69" 
+                           FontWeight="SemiBold"
+                           VerticalAlignment="Center"/>
+                <TextBlock Text="Next Visit Date" 
+                           Grid.Row="4" 
+                           Foreground="#2a4d69" 
+                           FontWeight="SemiBold"
+                           VerticalAlignment="Center"/>
+                <TextBlock Text="Next Visit Type" 
+                           Grid.Row="5" 
+                           Foreground="#2a4d69" 
+                           FontWeight="SemiBold"
+                           VerticalAlignment="Center"/>
+
+                <!-- Textboxes and Controls -->
+                <TextBox Grid.Row="0" 
+                         Grid.Column="1" 
+                         Text="{Binding SelectedVaccination.Pet.Name}" 
+                         Margin="0,5,0,15"
+                         Foreground="Black" 
+                         Background="#f7fbfc"
+                         BorderBrush="#d1d5d8"
+                         Padding="5"
+                         IsReadOnly="True"/>
+
+                <TextBox Grid.Row="1" 
+                         Grid.Column="1" 
+                         Text="{Binding SelectedVaccination.VaccinationType}" 
+                         Margin="0,5,0,15"
+                         Foreground="Black" 
+                         Background="#f7fbfc"
+                         BorderBrush="#d1d5d8"
+                         Padding="5"/>
+
+                <TextBox Grid.Row="2" 
+                         Grid.Column="1" 
+                         Text="{Binding SelectedVaccination.Vet}" 
+                         Margin="0,5,0,15"
+                         Foreground="Black" 
+                         Background="#f7fbfc"
+                         BorderBrush="#d1d5d8"
+                         Padding="5"/>
+
+
+
+                <DatePicker  Foreground="Black"  Background="#f7fbfc" BorderBrush="#d1d5d8" Text="{Binding SelectedVaccination.Date , Mode=TwoWay}"  Grid.Row="3" Grid.Column="1" Margin="0,0,0,15" IsTodayHighlighted="True" SelectedDateFormat="Short"/>
+
+
+                <DatePicker  Foreground="Black"  Background="#f7fbfc" BorderBrush="#d1d5d8" Text="{Binding SelectedVaccination.NextVisit , Mode=TwoWay}"  Grid.Row="4" Grid.Column="1" Margin="0,0,0,15" IsTodayHighlighted="True" SelectedDateFormat="Short"/>
+
+
+                <ComboBox Grid.Row="5" 
+                          Grid.Column="1" 
+                          ItemsSource="{Binding NextVisitTypeCollection}" 
+                          Text="{Binding SelectedVaccination.NextVisitType}" 
+                          Margin="0,5,0,15"
+                          Foreground="Black" 
+                          Background="#f7fbfc"
+                          BorderBrush="#d1d5d8"
+                          Padding="5"/>
+
+                <!-- Button with subtle hover effect -->
+                <Button Content="Update" 
+                        Grid.Row="7" 
+                        Grid.ColumnSpan="2" 
+                        HorizontalAlignment="Center"
+                        Width="150"
+                        Height="40"
+                        FontWeight="SemiBold"
+                        Background="#f4a62a"
+                        Foreground="White"
+                        BorderBrush="Transparent"
+                        Command="{Binding UpdateVaccinationCommand}"
+                        CommandParameter="{Binding SelectedVaccination}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#f4a62a" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="Cursor" Value="Hand" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#ec9210" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Window>

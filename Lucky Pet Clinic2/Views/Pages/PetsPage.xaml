@@ -1,0 +1,171 @@
+﻿<Page x:Class="Lucky_Pet_Clinic2.Views.Pages.PetsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Lucky_Pet_Clinic2.Views.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      d:DataContext="{d:DesignInstance local:AddPetPage,IsDesignTimeCreatable=False}"
+      ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+      ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PetsPage">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Views/Pages/DR.png" TileMode="FlipX" Stretch="Uniform" Opacity="0.15">
+                <ImageBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="1" ScaleY="1"/>
+                        <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                        <RotateTransform CenterX="0.5" CenterY="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ImageBrush.RelativeTransform>
+            </ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />            
+
+        </Grid.ColumnDefinitions>
+
+        <TextBlock VerticalAlignment="Center" Text="Client ID" Margin="0,0,0,15" Grid.Column="0" Grid.Row="0"/>
+        <TextBlock VerticalAlignment="Center" Text="Client Name" Margin="0,0,0,15" Grid.Row="1"  />
+
+        <ui:TextBox  Grid.Row="0" Grid.Column="1" Margin="0,0,0,15" Text="{Binding ClientId, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" />
+        <ui:TextBox  Grid.Row="1" Grid.Column="1" Margin="0,0,0,15" Text="{Binding ClientName, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" />
+
+        <!--<Button HorizontalAlignment="Center" Content="Find" Grid.Row="0" Grid.Column="2" Command="{Binding SearchPetsCommand}" />
+        <Button  Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"  Content="Refresh" Command="{Binding RefreshCommand}" Margin="10" />-->
+
+        <DataGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsReadOnly="True" Grid.Row="2" Grid.ColumnSpan="5" ItemsSource="{Binding Pets}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedPet, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Width="auto" Header="Pet ID" Binding="{Binding Id}" />
+                <!-- Wrapped Text for Pet Name -->
+                <DataGridTemplateColumn Width="*" Header="Pet Name">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock  Text="{Binding Name}" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Wrapped Text for Type -->
+                <DataGridTemplateColumn Width="*" Header="Breed">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock  Text="{Binding Type}" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn Width="*" Header="Species">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Species}" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Formatted Date of Birth -->
+                <!--<DataGridTextColumn Width="*" Header="Date Of Birth" Binding="{Binding DateOfBirth, StringFormat={}{0:MM/dd/yyyy}}" />-->
+
+                <!-- Age Column with Wrapped Text -->
+                <DataGridTemplateColumn Width="*" Header="Age">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock  TextWrapping="Wrap">
+                        <Run Text="{Binding AgeYears}" />
+                        <Run Text="Y/" />
+                        <Run Text="{Binding AgeMonths}" />
+                        <Run Text="M/" />
+                        <Run Text="{Binding AgeDays}" />
+                        <Run Text="D" />
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+
+                                <!-- Surgery Button with FontAwesome Icon -->
+                                <Button Command="{Binding DataContext.NavigateToSurgeryPageCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" Background="#FF6A6A" Foreground="White" BorderBrush="Transparent" Margin="0,0,5,0" Width="100">
+                                    <StackPanel Orientation="Horizontal">
+                                        <fa:ImageAwesome Icon="Heartbeat" Width="16" Height="16" Margin="0,0,5,0" />
+                                        <TextBlock Text="Surgery" />
+                                    </StackPanel>
+                                </Button>
+
+                                <!-- Vaccination Button with FontAwesome Icon -->
+                                <Button Command="{Binding DataContext.NavigateToVaccinationPageCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" Background="#4CAF50" Foreground="White" BorderBrush="Transparent" Margin="0,0,5,0" Width="100">
+                                    <StackPanel Orientation="Horizontal">
+                                        <fa:ImageAwesome Icon="History" Width="16" Height="16" Margin="0,0,5,0" />
+                                        <TextBlock Text="Vaccination" />
+                                    </StackPanel>
+                                </Button>
+
+                                <!-- Examination Button with FontAwesome Icon -->
+                                <Button Command="{Binding DataContext.NavigateToExaminationPageCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" Background="#2196F3" Foreground="White" BorderBrush="Transparent" Margin="0,0,5,0" Width="100">
+                                    <StackPanel Orientation="Horizontal">
+                                        <fa:ImageAwesome Icon="Stethoscope" Width="16" Height="16" Margin="0,0,5,0" />
+                                        <TextBlock Text="Examination" />
+                                    </StackPanel>
+                                </Button>
+
+                                <!-- Show Button with FontAwesome Icon -->
+                                <Button Command="{Binding DataContext.NavigateToDataPageCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" Background="#00796B" Foreground="White" BorderBrush="Transparent" Margin="0,0,5,0" Width="100">
+                                    <StackPanel Orientation="Horizontal">
+                                        <fa:ImageAwesome Icon="Database" Width="16" Height="16" Margin="0,0,5,0" />
+                                        <TextBlock Text="Data" />
+                                    </StackPanel>
+                                </Button>
+
+                                <Button  Margin="0,0,5,0" Background="#FF9800" Command="{Binding DataContext.OpenPetWindowCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding Id}" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <fa:ImageAwesome Icon="Edit" Width="16" Height="16" Margin="0,0,5,0" />
+                                        <TextBlock Text="Edit" />
+                                    </StackPanel>
+                                </Button>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <ContentControl Grid.Row="8" Margin="50" Grid.ColumnSpan="4">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <!-- Trigger when the collection is empty -->
+                        <DataTrigger Binding="{Binding Pets.Count}" Value="0">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+            <TextBlock Text="No Pets found." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="Gray"/>
+        </ContentControl>
+
+
+
+
+
+
+    </Grid>
+</Page>

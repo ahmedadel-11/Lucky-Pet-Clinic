@@ -1,0 +1,156 @@
+﻿<Page 
+      x:Class="Lucky_Pet_Clinic2.Views.Pages.VisitsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Lucky_Pet_Clinic2.Views.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="VisitsPage"
+      d:DataContext="{d:DesignInstance local:VisitsPage,
+                                     IsDesignTimeCreatable=False}"
+        ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+        ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+        Foreground="{DynamicResource TextFillColorPrimaryBrush}">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Views/Pages/DR.png" TileMode="FlipX" Stretch="Uniform" Opacity="0.15">
+                <ImageBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="1" ScaleY="1"/>
+                        <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                        <RotateTransform CenterX="0.5" CenterY="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ImageBrush.RelativeTransform>
+            </ImageBrush>
+        </Grid.Background>
+        <!-- Date Picker -->
+        <DatePicker x:Name="datePicker"  SelectedDate="{Binding SelectedDate, Mode=TwoWay}"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" FirstDayOfWeek="Saturday" IsTodayHighlighted="True" SelectedDateFormat="Short"/>
+        <Button  Grid.Row="0" Grid.Column="4" Content="Refresh" Command="{Binding RefreshCommand}" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Top" />
+
+        <!-- TabControl for Examinations, Surgeries, and Vaccinations -->
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,50,10,10">
+
+            <!-- Examinations Tab -->
+            <TabItem Header="Examinations">
+                <Grid>
+                    <DataGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding FilteredExaminations}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="Pet ID" Binding="{Binding Pet.Id}" />
+                            <DataGridTextColumn Width="*" Header="Pet Name" Binding="{Binding Pet.Name}" />
+                            <DataGridTextColumn Width="*" Header="Client ID" Binding="{Binding Pet.Client.Id}" />
+                            <DataGridTextColumn Width="*" Header="Client Name" Binding="{Binding Pet.Client.Name}" />
+                            <DataGridTextColumn Width="*" Header="Client Number" Binding="{Binding Pet.Client.MobileNumber}" />
+                            <!-- WhatsApp button -->
+                            <DataGridTemplateColumn Width="*" Header="WhatsApp">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="WhatsApp" Background="#25d366" Command="{Binding DataContext.OpenWhatsAppCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding Pet.Client.MobileNumber}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <ContentControl Grid.Row="1" Margin="50">
+                        <ContentControl.Style>
+                            <Style TargetType="ContentControl">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <!-- Trigger when the collection is empty -->
+                                    <DataTrigger Binding="{Binding FilteredExaminations.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                        <TextBlock Text="No Upcoming Examinations found." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="Gray"/>
+                    </ContentControl>
+
+                </Grid>
+            </TabItem>
+
+            <!-- Surgeries Tab -->
+            <TabItem Header="Surgeries">
+                <Grid>
+                    <DataGrid IsReadOnly="True" CanUserAddRows="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding FilteredSurgeries}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="Pet ID" Binding="{Binding Pet.Id}" />
+                            <DataGridTextColumn Width="*" Header="Pet Name" Binding="{Binding Pet.Name}" />
+                            <DataGridTextColumn Width="*" Header="Client ID" Binding="{Binding Pet.Client.Id}" />
+                            <DataGridTextColumn Width="*" Header="Client Name" Binding="{Binding Pet.Client.Name}" />
+                            <DataGridTextColumn Width="*" Header="Client Number" Binding="{Binding Pet.Client.MobileNumber}" />
+                            <!-- WhatsApp button -->
+                            <DataGridTemplateColumn Width="*" Header="WhatsApp">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="WhatsApp" Background="#25d366" Command="{Binding DataContext.OpenWhatsAppCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding Pet.Client.MobileNumber}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <ContentControl Grid.Row="1" Margin="50">
+                        <ContentControl.Style>
+                            <Style TargetType="ContentControl">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <!-- Trigger when the collection is empty -->
+                                    <DataTrigger Binding="{Binding FilteredSurgeries.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                        <TextBlock Text="No Upcoming Surgeries found." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="Gray"/>
+                    </ContentControl>
+                </Grid>
+            </TabItem>
+
+            <!-- Vaccinations Tab -->
+            <TabItem Header="Vaccinations">
+                <Grid>
+                    <DataGrid IsReadOnly="True" CanUserAddRows="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding FilteredVaccinations}" AutoGenerateColumns="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="Pet ID" Binding="{Binding Pet.Id}" />
+                            <DataGridTextColumn Width="*" Header="Pet Name" Binding="{Binding Pet.Name}" />
+                            <DataGridTextColumn Width="*" Header="Client ID" Binding="{Binding Pet.Client.Id}" />
+                            <DataGridTextColumn Width="*" Header="Client Name" Binding="{Binding Pet.Client.Name}" />
+                            <DataGridTextColumn Width="*" Header="Client Number" Binding="{Binding Pet.Client.MobileNumber}" />
+                            <!-- WhatsApp button -->
+                            <DataGridTemplateColumn Width="*" Header="WhatsApp">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="WhatsApp" Background="#25d366" Command="{Binding DataContext.OpenWhatsAppCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding Pet.Client.MobileNumber}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <ContentControl Grid.Row="1" Margin="50">
+                        <ContentControl.Style>
+                            <Style TargetType="ContentControl">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <!-- Trigger when the collection is empty -->
+                                    <DataTrigger Binding="{Binding FilteredVaccinations.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                        <TextBlock Text="No Upcoming Vaccinations found." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="Gray"/>
+                    </ContentControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

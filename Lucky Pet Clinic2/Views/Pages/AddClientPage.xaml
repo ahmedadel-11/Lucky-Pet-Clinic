@@ -1,0 +1,71 @@
+﻿<Page x:Class="Lucky_Pet_Clinic2.Views.Pages.AddClientPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helpers="clr-namespace:Lucky_Pet_Clinic2.Helpers"
+    xmlns:local="clr-namespace:Lucky_Pet_Clinic2.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:pages="clr-namespace:Lucky_Pet_Clinic2.ViewModels.Pages"
+      Title="Add Client"
+      d:DataContext="{d:DesignInstance pages:AddClientViewModel,
+                                     IsDesignTimeCreatable=False}"
+      
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d"
+      
+      >
+    <Page.Resources>
+        <!-- Use the correct built-in namespace -->
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Views/Pages/DR.png" TileMode="FlipX" Stretch="Uniform" Opacity="0.15">
+                <ImageBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="1" ScaleY="1"/>
+                        <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                        <RotateTransform CenterX="0.5" CenterY="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ImageBrush.RelativeTransform>
+            </ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Client Name" Margin="0,0,0,15"  />
+        <ui:TextBox Grid.Row="1" Text="{Binding ClientName, UpdateSourceTrigger=PropertyChanged}" 
+                 Margin="0,0,0,15" PlaceholderText="Enter Client Name" />
+
+        <TextBlock Text="Number" Grid.Row="3" Margin="0,0,0,15"  />
+        <ui:TextBox Grid.Row="4" Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}" 
+                 Margin="0,0,0,15" PlaceholderText="Enter Number" />
+
+        <TextBlock Text="Address" Grid.Row="6" Margin="0,0,0,15"  />
+        <ui:TextBox Grid.Row="7" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" 
+                 Margin="0,0,0,15" PlaceholderText="Enter Address" />
+
+        <Button Content="Save" Grid.Row="9" Command="{Binding SaveCommand}" />
+        <!--<Button Content="Add Pet" Grid.Column="1" Grid.Row="9"  Command="{Binding NavigateToAddPetPageCommand}"/>-->
+
+    </Grid>
+</Page>
