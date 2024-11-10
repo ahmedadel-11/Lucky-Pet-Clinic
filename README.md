@@ -1,9 +1,7 @@
-
 # Lucky Pet Clinic 🐾
 
 Lucky Pet Clinic is a comprehensive veterinary clinic management application designed to streamline the management of pet information, client data, examinations, surgeries, and vaccinations. With a user-friendly interface and robust database integration, it helps veterinary professionals organize and access essential records efficiently.
 
-![Lucky Pet Clinic Banner](path/to/your/image/banner.png) <!-- Use a banner image here that represents the clinic's theme -->
 
 ## Features
 
@@ -15,8 +13,9 @@ Lucky Pet Clinic is a comprehensive veterinary clinic management application des
 - **File Management** 📂: Open and manage files related to pets and examinations for organized documentation.
 - **Database Integration** 🗄️: Leverages SQL Server for secure and efficient data storage.
 - **Error Handling** ⚠️: Comprehensive error handling with logging for prompt issue identification.
+- **Dark & Light Theme Support** 🌗: Switch between dark and light themes for optimal comfort in different lighting environments.
 
-![Dashboard Screenshot](path/to/your/image/dashboard.png) <!-- Screenshot of the main dashboard -->
+![Dashboard Screenshot](https://github.com/user-attachments/assets/bdeab1cb-f474-43c1-8a7a-804a306713f9)
 
 ---
 
@@ -62,7 +61,6 @@ Follow these steps to set up and run the Lucky Pet Clinic application.
    dotnet run
    ```
 
-![Login Page](path/to/your/image/login.png) <!-- Screenshot of the login page -->
 
 ---
 
@@ -71,22 +69,23 @@ Follow these steps to set up and run the Lucky Pet Clinic application.
 Here’s a quick guide to navigating the main features of Lucky Pet Clinic:
 
 - **Add Client**: Go to **Add Client**, enter client details, and save.  
-  ![Add Client Screenshot](path/to/your/image/add_client.png)
+  ![Add Client Screenshot](https://github.com/user-attachments/assets/34d205c7-b610-45d6-ad54-fdbd8d7df5a0)
 
 - **Add Pet**: Navigate to **Add Pet**, fill in the pet details, and save.  
-  ![Add Pet Screenshot](path/to/your/image/add_pet.png)
+  ![Add Pet Screenshot](https://github.com/user-attachments/assets/29525c03-58fa-4fe9-8f99-9b8025586d2f)
 
-- **Save Examination**: Go to **Examinations**, enter details, and save the record.  
-  ![Examination Page Screenshot](path/to/your/image/examination.png)
+- **Pets**: Navigate to **Pets**, all pets data.  
+  ![Pets Screenshot](https://github.com/user-attachments/assets/2e23f69c-ff3c-48b4-9f0a-47a6ca825ff7)
 
-- **Save Surgery**: In **Surgeries**, fill in surgery information and save.  
-  ![Surgery Page Screenshot](path/to/your/image/surgery.png)
+- **Examination**: Go to **Examinations**, enter details, and save the record.  
+  ![Examination Page Screenshot](https://github.com/user-attachments/assets/dde373cc-bd30-4c59-82a1-c742f6fe4adc)
 
-- **Save Vaccination**: Go to **Vaccinations**, enter details, and save.  
-  ![Vaccination Page Screenshot](path/to/your/image/vaccination.png)
+- **Surgery**: In **Surgeries**, fill in surgery information and save.  
+  ![Surgery Page Screenshot](https://github.com/user-attachments/assets/43a77539-52c9-4bed-97aa-1f8dc9cd680b)
 
-- **File Operations**: Open and manage files related to pets and examinations using the file picker.  
-  ![File Management Screenshot](path/to/your/image/file_management.png)
+- **Vaccination**: Go to **Vaccinations**, enter details, and save.  
+  ![Vaccination Page Screenshot](https://github.com/user-attachments/assets/d77deaee-97e6-4c4a-ad97-63b609f1e67b)
+
 
 ---
 
@@ -94,7 +93,7 @@ Here’s a quick guide to navigating the main features of Lucky Pet Clinic:
 
 Include a visual schema for the database structure to provide insight into the data relationships within the application.
 
-![Database Schema](path/to/your/image/db_schema.png) <!-- Database schema image -->
+![Database Schema](https://github.com/user-attachments/assets/f8e70bd6-ebbc-4c30-8b06-8ffee1addea2)
 
 ---
 
@@ -116,6 +115,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-> **Note:** Replace placeholder paths like `path/to/your/image` with actual file paths to display your images in the README.md.
-
----
